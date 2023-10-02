@@ -1,7 +1,2 @@
 #!/bin/bash
-find . -type f -name "*.gif" -print0 |
-	awk -F'/' -v RS='\0' '{gsub(/\.[^.]+$/, "", $NF); print tolower($NF) "\t" $0}' |
-LC_COLLATE=C sort -t$'\t' -f |
-awk -F'\t' '{print $2}' |
-tr '\0' '\n'
-echo
+find . -type f -name "*.gif" | rev | cut -d "/" -f 1 | cut -d '.' -f 2- | rev | LC_ALL=C sort -f
